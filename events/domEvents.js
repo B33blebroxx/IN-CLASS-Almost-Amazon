@@ -9,6 +9,7 @@ import { showAuthors } from '../pages/authors';
 import { showBooks } from '../pages/books';
 import viewAuthor from '../pages/viewAuthor';
 import viewBook from '../pages/viewBook';
+// import viewBook from '../pages/viewBook';
 
 /* eslint-disable no-alert */
 const domEvents = () => {

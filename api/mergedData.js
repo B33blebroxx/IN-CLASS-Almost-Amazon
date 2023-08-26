@@ -1,4 +1,3 @@
-// for merged promises
 import { getAuthorBooks, getSingleAuthor } from './authorData';
 import { getSingleBook } from './bookData';
 
