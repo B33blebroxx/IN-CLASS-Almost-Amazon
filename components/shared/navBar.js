@@ -28,7 +28,7 @@ const navBar = () => {
             <input
               class="form-control mr-sm-2"
               id="search"
-              placeholder="Search Book Titles"
+              placeholder="Search By Title or Description"
               aria-label="Search"
             />
             </li>
