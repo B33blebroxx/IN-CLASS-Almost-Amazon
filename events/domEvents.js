@@ -4,7 +4,7 @@ import { deleteAuthorBooksRelationship, getAuthorDetails, getBookDetails } from 
 import addAuthorForm from '../components/forms/addAuthorForm';
 import addBookForm from '../components/forms/addBookForm';
 import { emptyAuthors, showAuthors } from '../pages/authors';
-import { showBooks } from '../pages/books';
+import { emptyBooks, showBooks } from '../pages/books';
 import viewAuthor from '../pages/viewAuthor';
 import viewBook from '../pages/viewBook';
 // import viewBook from '../pages/viewBook';
@@ -15,7 +15,15 @@ const domEvents = (user) => {
     if (e.target.id.includes('delete-book')) {
       if (window.confirm('Want to delete?')) {
         const [, firebaseKey] = e.target.id.split('--');
-        deleteBook(firebaseKey).then(getBooks).then(showBooks);
+        deleteBook(firebaseKey).then(() => {
+          getBooks(user.uid).then((array) => {
+            if (array.length) {
+              showBooks(array);
+            } else {
+              emptyBooks();
+            }
+          });
+        });
       }
     }
 
