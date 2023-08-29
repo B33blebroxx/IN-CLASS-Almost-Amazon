@@ -2,24 +2,36 @@ import { signOut } from '../utils/auth';
 import { booksOnSale, getBooks, searchBooks } from '../api/bookData';
 import { emptyBooks, showBooks } from '../pages/books';
 import { getAuthors, getFavoriteAuthors } from '../api/authorData';
-import { showAuthors } from '../pages/authors';
+import { emptyAuthors, showAuthors } from '../pages/authors';
 
 // navigation events
-const navigationEvents = () => {
+const navigationEvents = (user) => {
   // LOGOUT BUTTON
   document.querySelector('#logout-button')
     .addEventListener('click', signOut);
 
   document.querySelector('#sale-books').addEventListener('click', () => {
-    booksOnSale().then(showBooks);
+    booksOnSale(user.uid).then(showBooks);
   });
 
   document.querySelector('#all-books').addEventListener('click', () => {
-    getBooks().then(showBooks);
+    getBooks(user.uid).then((array) => {
+      if (array.length) {
+        showBooks(array);
+      } else {
+        emptyBooks();
+      }
+    });
   });
 
   document.querySelector('#authors').addEventListener('click', () => {
-    getAuthors().then(showAuthors);
+    getAuthors(user.uid).then((array) => {
+      if (array.length) {
+        showAuthors(array);
+      } else {
+        emptyAuthors();
+      }
+    });
   });
 
   document.querySelector('#favorite-authors').addEventListener('click', () => {
@@ -35,7 +47,7 @@ const navigationEvents = () => {
       // MAKE A CALL TO THE API TO FILTER ON THE BOOKS
       // IF THE SEARCH DOESN'T RETURN ANYTHING, SHOW THE EMPTY STORE
       // OTHERWISE SHOW THE STORE
-      searchBooks(searchValue)
+      searchBooks(searchValue, user.uid)
         .then((search) => {
           if (search.length) {
             showBooks(search);
@@ -43,7 +55,6 @@ const navigationEvents = () => {
             emptyBooks();
           }
         });
-
       document.querySelector('#search').value = '';
     }
   });
