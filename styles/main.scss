@@ -3,13 +3,14 @@
 
 body {
   background-color: black;
+  font-family: 'Cairo Play', sans-serif;
 }
 
 .navbar-dark .navbar-brand {
-  font-family: "Oregano", cursive !important;
+  font-family: 'Bungee Spice', cursive !important;
   color: red;
   font-weight: 900;
-  font-size: 2em;
+  font-size: 3em;
 }
 
 .cart-items {
@@ -32,6 +33,11 @@ body {
   margin: 0 20px;
   font-size: 25px;
   color: white;
+}
+
+.card {
+  border-color: red;
+  border-width: 2px;
 }
 
 #main-container {
